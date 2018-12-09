@@ -1,0 +1,77 @@
+﻿@model WebApplication.ViewModels.Recu
+
+@{
+    ViewBag.Title = "EndReservationSimple";
+}
+
+<h2>EndReservationSimple</h2>
+
+    <h4>Recu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdReservation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdReservation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rooms)
+        </dt>
+
+        <dd>
+            @foreach (var item in Model.rooms)
+            {
+                @Html.DisplayFor(modelItem => item.Number)<text>  </text>
+            }
+
+        </dd>
+
+    </dl>
+}
+
+<p>
+    @Html.ActionLink("Retour à l'acceuil", "Index", "Home")
+</p>

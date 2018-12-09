@@ -1,0 +1,42 @@
+﻿@model WebApplication.ViewModels.DatesReservationVM
+
+@{
+    ViewBag.Title = "Reserver";
+}
+
+<h2>Réservation</h2>
+<h4>Entrer vos dates de réservations</h4>
+
+
+@using (Html.BeginForm("ChooseRoom", "Room", FormMethod.Post))
+    {
+    @Html.AntiForgeryToken()
+
+    <label>Nom :</label><input type="text" name="Name" required/><br />
+    <label>Prénom :</label><input type="text" name="FirstName" required/><br />
+    <label>Date d'arrivée :</label><input type="date" size="10" value="@DateTime.Now.AddDays(7).ToString("dd.MM.yyyy")" class="form_datetime" name="start" id="start" required><br/>
+    <label>Date d'arrivée :</label><input type="date" size="10" value="@DateTime.Now.AddDays(7).ToString("dd.MM.yyyy")" class="form_datetime" name="end" id="end" required><br />
+
+    <label>Emplacement de l'hôtel :</label>
+        <SELECT size="1" id="Location" name="Location">
+            <OPTION value="Martigny">Martigny
+            <OPTION value="Sion">Sion
+            <OPTION value="Brig">Brig
+        </SELECT><br />
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <a><input type="submit" value="Afficher les chambres disponibles" class="btn btn-default" /></a>
+                    </div>
+                </div>
+
+
+        }
+
+        <div>
+            @Html.ActionLink("Retour à l'acceuil", "Index", "Home") |
+            @Html.ActionLink("Recherche avancée", "AdvancedSearch", "Reservation")
+        </div>
+<script type="text/javascript">
+    $(".form_datetime").datepicker({ format: 'dd.mm.yyyy' });
+</script>

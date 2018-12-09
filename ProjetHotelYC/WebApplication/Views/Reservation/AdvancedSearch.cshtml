@@ -1,0 +1,124 @@
+﻿@model WebApplication.ViewModels.AdvancedSearch
+
+@{
+    ViewBag.Title = "AdvancedSearch";
+}
+
+
+
+<h2>Recherche Avancée</h2>
+
+@using (Html.BeginForm("ChooseRoomAdvanced", "Room", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <label>Nom :</label><input type="text" name="Name" required/><br /><br />
+    <label>Prénom :</label><input type="text" name="FirstName" required/><br /><br />
+    <label>Date d'arrivée :</label><input type="date" size="10" value="@DateTime.Now.AddDays(7).ToString("dd.MM.yyyy")" class="form_datetime" name="start" id="start"  required><br />
+    <label>Date d'arrivée :</label><input type="date" size="10" value="@DateTime.Now.AddDays(7).ToString("dd.MM.yyyy")" class="form_datetime" name="end" id="end" required><br />
+
+    <label>Emplacement de l'hôtel :</label><br />
+        <SELECT size="1" id="Location" name="Location">
+            <OPTION value="Martigny">Martigny
+            <OPTION value="Sion">Sion
+            <OPTION value="Brig">Brig
+        </SELECT><br /><br />
+
+    <label>Catégorie minimale de l'hôtel :</label><br />
+        <SELECT size="1" id="CategoryLow" name="CategoryLow">
+            <OPTION value="1">1 étoile
+            <OPTION value="2">2 étoiles
+            <OPTION value="3">3 étoiles
+            <OPTION value="4">4 étoiles
+            <OPTION value="5">5 étoiles
+        </SELECT><br /><br />
+
+    <label>Catégorie maximale de l'hôtel :</label><br />
+            <SELECT size="1" id="CategoryHigh" name="CategoryHigh">
+                <OPTION value="1">1 étoile
+                <OPTION value="2">2 étoiles
+                <OPTION value="3">3 étoiles
+                <OPTION value="4">4 étoiles
+                <OPTION value="5">5 étoiles
+            </SELECT><br /><br />
+
+
+     <label>Hôtel avec wifi :</label><br />
+            <SELECT size="1" id="HasWifi" name="HasWifi">
+                <OPTION value="True">Oui
+                <OPTION value="False">Non
+            </SELECT><br /><br />
+
+
+     <label>Hôtel avec parking :</label><br />
+            <SELECT size="1" id="HasParking" name="HasParking">
+                <OPTION value="True">Oui
+                <OPTION value="False">Non
+            </SELECT><br /><br />
+
+
+    <label>Type de chambre :</label><br />
+            <SELECT size="1" id="Type" name="Type">
+                <OPTION value="1">Simple
+                <OPTION value="2">Double
+                <OPTION value="3">Simple et Double
+            </SELECT><br /><br />
+
+
+    <label>Prix minimal de la nuit :</label><br />
+            <SELECT size="1" id="PriceLow" name="PriceLow">
+                <OPTION value="40">CHF 40
+                <OPTION value="60">CHF 60
+                <OPTION value="80">CHF 80
+                <OPTION value="85">CHF 85
+                <OPTION value="100">CHF 100
+                <OPTION value="120">CHF 120
+                <OPTION value="125">CHF 125
+                <OPTION value="150">CHF 150
+                <OPTION value="170">CHF 170
+                <OPTION value="200">CHF 200
+                <OPTION value="220">CHF 220
+            </SELECT><br /><br />
+
+
+      <label>Prix maximal de la nuit :</label><br />
+            <SELECT size="1" id="PriceHigh" name="PriceHigh">
+                <OPTION value="40">CHF 40
+                <OPTION value="60">CHF 60
+                <OPTION value="80">CHF 80
+                <OPTION value="85">CHF 85
+                <OPTION value="100">CHF 100
+                <OPTION value="120">CHF 120
+                <OPTION value="125">CHF 125
+                <OPTION value="150">CHF 150
+                <OPTION value="170">CHF 170
+                <OPTION value="200">CHF 200
+                <OPTION value="220">CHF 220
+            </SELECT><br /><br />
+
+      <label>Chambre avec TV :</label><br />
+            <SELECT size="1" id="HasTV" name="HasTV">
+                <OPTION value="True">Oui
+                <OPTION value="False">Non
+            </SELECT><br /><br />
+
+
+     <label>Chambre avec sèche cheveux :</label><br />
+            <SELECT size="1" id="HasHairDryer" name="HasHairDryer">
+                <OPTION value="True">Oui
+                <OPTION value="False">Non
+            </SELECT><br /><br />
+
+        <div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a><input type="submit" value="Afficher les chambres disponibles" class="btn btn-default" /></a>
+                </div>
+            </div>
+        </div>
+
+}
+<script type="text/javascript">
+    $(".form_datetime").datepicker({ format: 'dd.mm.yyyy' });
+</script>

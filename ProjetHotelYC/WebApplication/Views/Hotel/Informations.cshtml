@@ -1,0 +1,98 @@
+﻿@model DTO.Hotel
+
+@{
+    ViewBag.Title = "Informations";
+}
+
+<h4>Informations</h4>
+
+<div>
+    <h2>Hotel @Html.DisplayName(Model.Name)</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="hidden">
+            @Html.DisplayNameFor(model => model.IdHotel)
+        </dt>
+
+        <dd class="hidden">
+            @Html.DisplayFor(model => model.IdHotel)
+        </dd>
+
+        <dt class="hidden">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd class="hidden">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="hidden">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+
+            @Html.Raw(Model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)<text> étoiles</text>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasWifi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasWifi) 
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasParking)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasParking)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Retour à l'acceuil", "Index", "Home")
+</p>

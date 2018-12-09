@@ -1,0 +1,26 @@
+﻿@model WebApplication.ViewModels.SearchReservation
+
+@{
+    ViewBag.Title = "SearchReservation";
+}
+
+<h2>Rechercher une réservation</h2>
+
+@using (Html.BeginForm("ShowReservation", "Reservation", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <label>Numéro de réservation :</label><input type="number" name="IdReservation" required/><br />
+    <label>Nom :</label><input type="text" name="Name" required/><br />
+    <label>Prénom :</label><input type="text" name="FirstName" required/><br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a><input type="submit" value="Rechercher réservation" class="btn btn-default" /></a>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour à l'acceuil", "Index", "Home")
+</div>

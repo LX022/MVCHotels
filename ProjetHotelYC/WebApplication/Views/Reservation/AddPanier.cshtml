@@ -1,0 +1,92 @@
+﻿@model IEnumerable<DTO.Room>
+
+@{
+    ViewBag.Title = "AddPanier";
+}
+
+<h2>Sélectionner votre chambre</h2>
+
+<table class="table">
+    <tr>
+        <th class="hidden">
+            @Html.DisplayNameFor(model => model.IdRoom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th class="hidden">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasTV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasHairDryer)
+        </th>
+        <th class="hidden">
+            @Html.DisplayNameFor(model => model.IdHotel)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.IdRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @if (item.Type == 1)
+                {
+                    <text>chambre simple</text>
+                }
+                else
+                {
+                    <text>chambre double</text>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)<text> CHF</text>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasTV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasHairDryer)
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.IdHotel)
+            </td>
+
+            <td>
+                @Html.ActionLink("Description de la chambre", "DescriptionChambre", new { id = item.IdRoom }) |
+                @Html.ActionLink("Détails de l'hôtel", "Informations", "Hotel", new { id = item.IdHotel }, null) |
+                @Html.ActionLink("Réserver cette chambre et terminer", "EndReservationSimple", "Reservation", new { id = item.IdRoom }, null) |
+                @Html.ActionLink("Ajouter au panier", "AddPanier", "Reservation", new { id = item.IdRoom }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+<div>
+    @Html.ActionLink("Confirmer ma reservation", "Confirmer", "Reservation") |
+    @Html.ActionLink("Retour à l'acceuil", "Index", "Home")
+
+</div>
