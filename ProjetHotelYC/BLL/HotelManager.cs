@@ -12,14 +12,14 @@ namespace BLL
 {
     public static class HotelManager
     {
-
+       static string hotelsurl = "http://localhost:3749/api/Hotels/";
         public static List<Hotel> GetAllHotels()
         {
             List<Hotel> hotels;
-            string uri = "http://localhost:3749/api/Hotels/";
+            
             using (HttpClient httpClient = new HttpClient())
             {
-                Task<String> response = httpClient.GetStringAsync(uri);
+                Task<String> response = httpClient.GetStringAsync(hotelsurl);
                 hotels = JsonConvert.DeserializeObject<List<Hotel>>(response.Result);
             }
             return hotels;
@@ -27,7 +27,14 @@ namespace BLL
 
         public static Hotel GetHotel(int IdHotel)
         {
-            return HotelDB.GetHotel(IdHotel);
+            string hotelurl = hotelsurl + IdHotel;
+
+            using (HttpClient client = new HttpClient())
+            {
+
+                Task<string> response = client.GetStringAsync(hotelurl);
+                return JsonConvert.DeserializeObject<Hotel>(response.Result);
+            }
         }
 
         //méthode pour la recherche avancée
