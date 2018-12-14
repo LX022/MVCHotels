@@ -39,7 +39,7 @@ namespace BLL
             }
         }
 
-        //méthode pour la recherche avancée
+        //méthode pour la recherche avancée API
         public static List<int> ShowAvailablesHotelsAdvanced(string Location, int CategoryLow, int CategoryHigh, Boolean HasWifi, Boolean HasParking)
         {
             List<int> idHotels = new List<int>();
