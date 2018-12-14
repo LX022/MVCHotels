@@ -36,7 +36,7 @@ namespace BLL
 
             return AvailableRoom;
         }
-        //Renvoie la liste de chambres libre selon date et location
+        //Renvoie la liste de chambres libre selon date et emplacement
         public static List<Room> ShowAvailableRooms (String Location, DateTime Start, DateTime End)
         {
             List<Room> HotelsRooms = new List<Room>();

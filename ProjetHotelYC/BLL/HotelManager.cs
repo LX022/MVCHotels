@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 namespace BLL
 {
+    // Affichage de tous les hôtels API
     public static class HotelManager
     {
        static string hotelsurl = "http://localhost:3749/api/Hotels/";
@@ -25,6 +26,7 @@ namespace BLL
             return hotels;
         }
 
+        // Affichage d'un hôtel API
         public static Hotel GetHotel(int IdHotel)
         {
             string hotelurl = hotelsurl + IdHotel;
