@@ -14,15 +14,16 @@ namespace BLL
     public static class HotelManager
     {
        static string hotelsurl = "http://localhost:3749/api/Hotels/";
+        // Affichage des hôtels API
         public static List<Hotel> GetAllHotels()
         {
-            List<Hotel> hotels;
+         List<Hotel> hotels;
             
-            using (HttpClient httpClient = new HttpClient())
-            {
-                Task<String> response = httpClient.GetStringAsync(hotelsurl);
-                hotels = JsonConvert.DeserializeObject<List<Hotel>>(response.Result);
-            }
+           using (HttpClient httpClient = new HttpClient())
+           {
+            Task<String> response = httpClient.GetStringAsync(hotelsurl);
+            hotels = JsonConvert.DeserializeObject<List<Hotel>>(response.Result);
+           }
             return hotels;
         }
 

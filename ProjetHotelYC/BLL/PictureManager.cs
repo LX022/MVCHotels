@@ -12,7 +12,7 @@ namespace BLL
 {
     public class PictureManager
     {
-        static string hotelsurl = "http://localhost:3749/api/Hotels/";
+        static string hotelsurl = "http://localhost:3749/api/Pictures/";
 
         // Affichage des photos API
         public static List<Picture> GetPictures(int IdRoom)

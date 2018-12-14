@@ -5,22 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using DAL;
-
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace BLL
 {
     public class RoomManager
     {
+        static string hotelsurl = "http://localhost:3749/api/Rooms/";
+        // Liste des chambres API
         public static List<Room> GetAllRooms()
         {
-            return RoomDB.GetAllRooms();
+            List<Room> Rooms;
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Task<String> response = httpClient.GetStringAsync(hotelsurl);
+                Rooms = JsonConvert.DeserializeObject<List<Room>>(response.Result);
+            }
+            return Rooms;
         }
 
-        //Renvoie la liste de chambre libre
+        //Renvoie la liste de chambre libre API
         public static List<Room> GetAvailableRooms(List<int> IdBusyRooms)
         {
-
-
             List<Room> AllRooms = RoomManager.GetAllRooms();
             List<Room> AvailableRoom = new List<Room>();
 
@@ -63,7 +71,14 @@ namespace BLL
 
         public static Room GetRoom(int IdRoom)
         {
-            return RoomDB.GetRoom(IdRoom);
+            string hotelurl = hotelsurl + IdRoom;
+
+            using (HttpClient client = new HttpClient())
+            {
+
+                Task<string> response = client.GetStringAsync(hotelurl);
+                return JsonConvert.DeserializeObject<Room>(response.Result);
+            }
         }
         //Renvoie la liste de chambres libre selon les critères de recherche avancé sans type
         public static List<Room>ShowAvailableRoomsAdvanced(decimal PriceLow, decimal PriceHigh, Boolean HasTv, Boolean HasHairDryer, DateTime Start, DateTime End)
