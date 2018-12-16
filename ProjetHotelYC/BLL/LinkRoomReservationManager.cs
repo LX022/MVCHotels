@@ -5,14 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using DAL;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace BLL
 {
    public class LinkRoomReservationManager
     {
+        static string linkRoomReservationUrl = "http://localhost:3749/api/LinkRoomReservations/";
+
+        //Get All LinkRoomReservation API
         public static List<LinkRoomReservation> GetAllLinkRoomReservation()
         {
-           return LinkRoomReservationDB.GetAllLinkRoomReservation();
+            List<LinkRoomReservation> linksRoom;
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Task<String> response = httpClient.GetStringAsync(linkRoomReservationUrl);
+                linksRoom = JsonConvert.DeserializeObject<List<LinkRoomReservation>>(response.Result);
+            }
+            return linksRoom;
         }
 
         //écrit dans LinkRoomReservation lors d'un ajout de réservation
@@ -30,7 +42,7 @@ namespace BLL
         public static List<int> GetBusyRooms(List<int> IdActiveReservations)
         {
             List<int> IdBusyRooms = new List<int>();
-            List<LinkRoomReservation> LinkRoomReservations = LinkRoomReservationDB.GetAllLinkRoomReservation();
+            List<LinkRoomReservation> LinkRoomReservations = BLL.LinkRoomReservationManager.GetAllLinkRoomReservation();
 
             foreach (LinkRoomReservation lrr in LinkRoomReservations)
             {

@@ -5,20 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using DAL;
-
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace BLL
 {
    public class ReservationManager
     {
+        static string reservationUrl = "http://localhost:3749/api/Reservations/";
+        //Obtenir une réservation API
         public static Reservation GetReservation(int IdReservation)
         {
-            return ReservationDB.GetReservation(IdReservation);
+            string reservationurl = reservationUrl + IdReservation;
+
+            using (HttpClient client = new HttpClient())
+            {
+
+                Task<string> response = client.GetStringAsync(reservationUrl);
+                return JsonConvert.DeserializeObject<Reservation>(response.Result);
+            }
         }
 
+        //Obtenir toutes les réservations API
         public static List<Reservation> GetAllReservations()
         {
-            return ReservationDB.GetAllReservations();
+            List<Reservation> reservations;
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Task<String> response = httpClient.GetStringAsync(reservationUrl);
+                reservations = JsonConvert.DeserializeObject<List<Reservation>>(response.Result);
+            }
+            return reservations;
+
         }
 
         //Ecrit dans la bd lors de la création d'une réservation

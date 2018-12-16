@@ -12,7 +12,7 @@ namespace BLL
 {
     public class RoomManager
     {
-        static string hotelsurl = "http://localhost:3749/api/Rooms/";
+        static string roomsURL = "http://localhost:3749/api/Rooms/";
         // Liste des chambres API
         public static List<Room> GetAllRooms()
         {
@@ -20,7 +20,7 @@ namespace BLL
 
             using (HttpClient httpClient = new HttpClient())
             {
-                Task<String> response = httpClient.GetStringAsync(hotelsurl);
+                Task<String> response = httpClient.GetStringAsync(roomsURL);
                 Rooms = JsonConvert.DeserializeObject<List<Room>>(response.Result);
             }
             return Rooms;
@@ -71,7 +71,7 @@ namespace BLL
 
         public static Room GetRoom(int IdRoom)
         {
-            string hotelurl = hotelsurl + IdRoom;
+            string hotelurl = roomsURL + IdRoom;
 
             using (HttpClient client = new HttpClient())
             {
