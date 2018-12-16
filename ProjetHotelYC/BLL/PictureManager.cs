@@ -17,13 +17,23 @@ namespace BLL
         public static List<Picture> GetPictures(int IdRoom)
         {
             List<Picture> pictures;
+            List<Picture> roomPictures = new List<Picture>();
 
             using (HttpClient httpClient = new HttpClient())
             {
                 Task<String> response = httpClient.GetStringAsync(picturesURL);
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(response.Result);
             }
-            return pictures;
+
+            foreach(Picture p in pictures)
+            {
+                if (p.IdRoom.Equals(IdRoom))
+                {
+                    roomPictures.Add(p);
+                }
+            }
+
+            return roomPictures;
         }
     }
 }
