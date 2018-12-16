@@ -32,10 +32,19 @@ namespace BLL
         {
             return LinkRoomReservationDB.AddLinkRoomReservation(PriceRoom, IdReservation, IdRoom);
         }
-        //-------------------------------------------------------------------------------------------------
-        public static int DeleteLinkRoomReservation(int IdLinkRoomReservation)
+
+        public static void DeleteLinkRoomReservation(int IdLinkRoomReservation)
         {
-            return LinkRoomReservationDB.DeleteLinkRoomReservation(IdLinkRoomReservation);
+            //return LinkRoomReservationDB.DeleteLinkRoomReservation(IdLinkRoomReservation);
+
+            String toDelete = linkRoomReservationURL + IdLinkRoomReservation;
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+
+                httpClient.DeleteAsync(toDelete);
+
+            }
         }
 
         //Renvoie les ids des chambres occupées selon une liste d'id de réservation

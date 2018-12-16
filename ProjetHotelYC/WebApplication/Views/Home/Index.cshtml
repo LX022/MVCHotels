@@ -6,84 +6,88 @@
 
 <center><h1>Valais Booking</h1></center>
 
+<center>
+    <img src="~/Picture/p.jpg" alt="image" width="600" height="200">
+</center>
 
-<h2>Nos hôtels :</h2>
+    <h2>Nos hôtels :</h2>
 
-<table class="table">
-    <tr>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.IdHotel)
-        </th>
-        <th >
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.HasWifi)
-        </th>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.HasParking)
-        </th>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th class="hidden">
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.IdHotel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.HasWifi)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.HasParking)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.Website)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.IdHotel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)<text> étoiles</text>
-        </td>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.HasWifi)
-        </td>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.HasParking)
-        </td>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td class="hidden">
-            @Html.DisplayFor(modelItem => item.Website)
-        </td>
-        <td>
-            @Html.ActionLink("Informations", "Informations","Hotel", new {id=item.IdHotel},null)
-            
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.IdHotel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)<text> étoiles</text>
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.HasWifi)
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.HasParking)
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class="hidden">
+                    @Html.DisplayFor(modelItem => item.Website)
+                </td>
+                <td>
+                    @Html.ActionLink("Informations", "Informations", "Hotel", new { id = item.IdHotel }, null)
 
-    }
-</table>
+                </td>
+            </tr>
 
-<centrer>@Html.ActionLink("Réserver", "Reserver", "Reservation", new { id = 0 }, null)</centrer>
+        }
+    </table>
+
+
 

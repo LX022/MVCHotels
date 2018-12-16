@@ -60,9 +60,18 @@ namespace BLL
 
         }
 
-        public static int DeleteReservation(int IdReservation)
+        public static void DeleteReservation(int IdReservation)
         {
-            return ReservationDB.DeleteReservation(IdReservation);
+            //return ReservationDB.DeleteReservation(IdReservation);
+
+            String toDelete = reservationURL + IdReservation;
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+
+                httpClient.DeleteAsync(toDelete);
+               
+            }
         }
 
         //Trouve les reservations existantes selon dates
