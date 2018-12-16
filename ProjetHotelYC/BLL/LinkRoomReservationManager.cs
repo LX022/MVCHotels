@@ -28,11 +28,20 @@ namespace BLL
         }
         //-------------------------------------------------------------------------------------------------
         //écrit dans LinkRoomReservation lors d'un ajout de réservation
-        public static int AddLinkRoomReservation(Decimal PriceRoom,int IdReservation, int IdRoom)
+        public static Boolean AddLinkRoomReservation(Decimal PriceRoom,int IdReservation, int IdRoom)
         {
-            return LinkRoomReservationDB.AddLinkRoomReservation(PriceRoom, IdReservation, IdRoom);
-        }
 
+            LinkRoomReservation toAdd = new LinkRoomReservation(PriceRoom, IdReservation, IdRoom);
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string pro = JsonConvert.SerializeObject(toAdd);
+                StringContent frame = new StringContent(pro, Encoding.UTF8, "Application/json");
+                Task<HttpResponseMessage> response = httpClient.PostAsync(linkRoomReservationURL, frame);
+                return response.Result.IsSuccessStatusCode;
+            }
+        }
+        //-------------------------------------------------------------------------------------------------
         public static void DeleteLinkRoomReservation(int IdLinkRoomReservation)
         {
             //return LinkRoomReservationDB.DeleteLinkRoomReservation(IdLinkRoomReservation);
@@ -46,7 +55,7 @@ namespace BLL
 
             }
         }
-
+        //-------------------------------------------------------------------------------------------------
         //Renvoie les ids des chambres occupées selon une liste d'id de réservation
         public static List<int> GetBusyRooms(List<int> IdActiveReservations)
         {

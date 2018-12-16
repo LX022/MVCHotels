@@ -9,6 +9,7 @@ using DTO;
 
 namespace DAL
 {
+    /*
     public class LinkRoomReservationDB
     {
         public static List<LinkRoomReservation> GetAllLinkRoomReservation()
@@ -110,5 +111,5 @@ namespace DAL
 
             return result;
         }
-    }
+    }*/
 }

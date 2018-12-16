@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using DAL;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace BLL
 {
@@ -39,15 +38,30 @@ namespace BLL
             return reservations;
 
         }
-
+        //-------------------------------------------------------------------------------------------------
         //Ecrit dans la bd lors de la création d'une réservation
-        public static void CreatReservation(List<Room> Rooms, DateTime DateStart, DateTime DateEnd, string Name, string FirstName)
+        public static Boolean CreatReservation(List<Room> Rooms, DateTime DateStart, DateTime DateEnd, string Name, string FirstName)
         {
             TimeSpan NbDays;
 
             NbDays = DateEnd - DateStart;
 
-           var IdReservation = DAL.ReservationDB.AddReservation(DateStart, DateEnd, Name, FirstName);
+
+            Reservation toAdd = new Reservation(DateStart, DateEnd, Name, FirstName);
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string pro = JsonConvert.SerializeObject(toAdd);
+                StringContent frame = new StringContent(pro, Encoding.UTF8, "Application/json");
+                Task<HttpResponseMessage> response = httpClient.PostAsync(reservationURL, frame);
+
+
+                var IdReservationPath = response.Result.Headers.Location.AbsolutePath;
+                var IdString = IdReservationPath.Replace("/api/Reservations/", "");
+                var IdReservation = Int32.Parse(IdString);
+
+
+
 
             foreach (Room room in Rooms)
             {
@@ -55,11 +69,12 @@ namespace BLL
 
                 PriceRoom = room.Price * NbDays.Days;
 
-                DAL.LinkRoomReservationDB.AddLinkRoomReservation(PriceRoom, IdReservation, room.IdRoom);
+                LinkRoomReservationManager.AddLinkRoomReservation(PriceRoom, IdReservation, room.IdRoom);
             };
-
+                return response.Result.IsSuccessStatusCode;
+            }
         }
-
+        //-------------------------------------------------------------------------------------------------
         public static void DeleteReservation(int IdReservation)
         {
             //return ReservationDB.DeleteReservation(IdReservation);
@@ -73,6 +88,7 @@ namespace BLL
                
             }
         }
+        //-------------------------------------------------------------------------------------------------
 
         //Trouve les reservations existantes selon dates
         public static List<int> GetActiveReservations(DateTime DateStart, DateTime DateEnd)
@@ -89,24 +105,19 @@ namespace BLL
             }
                 return IdActiveReservations;
         }
-
+        //-------------------------------------------------------------------------------------------------
         public static void CreatSimpleReservation(Room r, DateTime DateStart, DateTime DateEnd, string Name, string FirstName)
         {
-            TimeSpan NbDays;
 
-            NbDays = DateEnd - DateStart;
+            List<Room> rooms= new List<Room>();
 
-            var IdReservation = DAL.ReservationDB.AddReservation(DateStart, DateEnd, Name, FirstName);
+            rooms.Add(r);
 
-
-
-            decimal PriceRoom;
-
-                PriceRoom = r.Price * NbDays.Days;
-
-                DAL.LinkRoomReservationDB.AddLinkRoomReservation(PriceRoom, IdReservation, r.IdRoom);
+            CreatReservation(rooms, DateStart,DateEnd,Name,FirstName);
 
         }
+        //-------------------------------------------------------------------------------------------------
+
         //Renvoie la date d'arrivée pour le reçu
         public static DateTime GetStart(int IdReservation)
         {

@@ -21,5 +21,12 @@ namespace DTO
                     "IdRoom: " + IdRoom;
         }
 
+        public LinkRoomReservation(decimal PriceRoom, int IdReservation, int IdRoom)
+        {
+            this.PriceRoom = PriceRoom;
+            this.IdReservation = IdReservation;
+            this.IdRoom = IdRoom;
+        }
+
     }
 }

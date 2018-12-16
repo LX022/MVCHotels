@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
+    /*
     public class ReservationDB
     {
         public static Reservation GetReservation(int IdReservation)
@@ -150,5 +151,5 @@ namespace DAL
 
             return result;
         }
-    }
+    }*/
 }

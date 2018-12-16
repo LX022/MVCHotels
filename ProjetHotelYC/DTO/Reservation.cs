@@ -22,5 +22,13 @@ namespace DTO
                     "Name: " + Name +
                     "FirstName: " + FirstName;
         }
+
+        public Reservation(DateTime DateStart, DateTime DateEnd, string Name, string FirstName)
+        {
+            this.DateStart = DateStart;
+            this.DateEnd = DateEnd;
+            this.Name = Name;
+            this.FirstName = FirstName;
+        }
     }
 }
