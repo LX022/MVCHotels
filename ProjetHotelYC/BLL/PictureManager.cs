@@ -12,7 +12,7 @@ namespace BLL
 {
     public class PictureManager
     {
-        static string hotelsurl = "http://localhost:3749/api/Pictures/";
+        static string picturesURL = "http://localhost:3749/api/Pictures/";
 
         // Affichage des photos API
         public static List<Picture> GetPictures(int IdRoom)
@@ -21,7 +21,7 @@ namespace BLL
 
             using (HttpClient httpClient = new HttpClient())
             {
-                Task<String> response = httpClient.GetStringAsync(hotelsurl);
+                Task<String> response = httpClient.GetStringAsync(picturesURL);
                 pictures = JsonConvert.DeserializeObject<List<Picture>>(response.Result);
             }
             return pictures;

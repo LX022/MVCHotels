@@ -12,7 +12,7 @@ namespace BLL
 {
    public class LinkRoomReservationManager
     {
-        static string linkRoomReservationUrl = "http://localhost:3749/api/LinkRoomReservations/";
+        static string linkRoomReservationURL = "http://localhost:3749/api/LinkRoomReservations/";
 
         //Get All LinkRoomReservation API
         public static List<LinkRoomReservation> GetAllLinkRoomReservation()
@@ -21,18 +21,18 @@ namespace BLL
 
             using (HttpClient httpClient = new HttpClient())
             {
-                Task<String> response = httpClient.GetStringAsync(linkRoomReservationUrl);
+                Task<String> response = httpClient.GetStringAsync(linkRoomReservationURL);
                 linksRoom = JsonConvert.DeserializeObject<List<LinkRoomReservation>>(response.Result);
             }
             return linksRoom;
         }
-
+        //-------------------------------------------------------------------------------------------------
         //écrit dans LinkRoomReservation lors d'un ajout de réservation
         public static int AddLinkRoomReservation(Decimal PriceRoom,int IdReservation, int IdRoom)
         {
             return LinkRoomReservationDB.AddLinkRoomReservation(PriceRoom, IdReservation, IdRoom);
         }
-
+        //-------------------------------------------------------------------------------------------------
         public static int DeleteLinkRoomReservation(int IdLinkRoomReservation)
         {
             return LinkRoomReservationDB.DeleteLinkRoomReservation(IdLinkRoomReservation);

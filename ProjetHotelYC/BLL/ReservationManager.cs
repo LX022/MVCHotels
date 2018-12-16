@@ -12,16 +12,16 @@ namespace BLL
 {
    public class ReservationManager
     {
-        static string reservationUrl = "http://localhost:3749/api/Reservations/";
+        static string reservationURL = "http://localhost:3749/api/Reservations/";
         //Obtenir une réservation API
         public static Reservation GetReservation(int IdReservation)
         {
-            string reservationurl = reservationUrl + IdReservation;
+            string reservationurl = reservationURL + IdReservation;
 
             using (HttpClient client = new HttpClient())
             {
 
-                Task<string> response = client.GetStringAsync(reservationUrl);
+                Task<string> response = client.GetStringAsync(reservationURL);
                 return JsonConvert.DeserializeObject<Reservation>(response.Result);
             }
         }
@@ -33,7 +33,7 @@ namespace BLL
 
             using (HttpClient httpClient = new HttpClient())
             {
-                Task<String> response = httpClient.GetStringAsync(reservationUrl);
+                Task<String> response = httpClient.GetStringAsync(reservationURL);
                 reservations = JsonConvert.DeserializeObject<List<Reservation>>(response.Result);
             }
             return reservations;

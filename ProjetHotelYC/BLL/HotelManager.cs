@@ -13,7 +13,7 @@ namespace BLL
     // Affichage de tous les hôtels API
     public static class HotelManager
     {
-       static string hotelsurl = "http://localhost:3749/api/Hotels/";
+       static string hotelsURL = "http://localhost:3749/api/Hotels/";
         // Affichage des hôtels API
         public static List<Hotel> GetAllHotels()
         {
@@ -21,7 +21,7 @@ namespace BLL
             
            using (HttpClient httpClient = new HttpClient())
            {
-            Task<String> response = httpClient.GetStringAsync(hotelsurl);
+            Task<String> response = httpClient.GetStringAsync(hotelsURL);
             hotels = JsonConvert.DeserializeObject<List<Hotel>>(response.Result);
            }
             return hotels;
@@ -30,7 +30,7 @@ namespace BLL
         // Affichage d'un hôtel API
         public static Hotel GetHotel(int IdHotel)
         {
-            string hotelurl = hotelsurl + IdHotel;
+            string hotelurl = hotelsURL + IdHotel;
 
             using (HttpClient client = new HttpClient())
             {
