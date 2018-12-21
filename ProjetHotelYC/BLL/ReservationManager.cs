@@ -60,9 +60,6 @@ namespace BLL
                 var IdString = IdReservationPath.Replace("/api/Reservations/", "");
                 var IdReservation = Int32.Parse(IdString);
 
-
-
-
             foreach (Room room in Rooms)
             {
                 decimal PriceRoom;
