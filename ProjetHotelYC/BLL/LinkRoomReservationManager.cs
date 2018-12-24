@@ -35,8 +35,8 @@ namespace BLL
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string pro = JsonConvert.SerializeObject(toAdd);
-                StringContent frame = new StringContent(pro, Encoding.UTF8, "Application/json");
+                string serialize = JsonConvert.SerializeObject(toAdd);
+                StringContent frame = new StringContent(serialize, Encoding.UTF8, "Application/json");
                 Task<HttpResponseMessage> response = httpClient.PostAsync(linkRoomReservationURL, frame);
                 return response.Result.IsSuccessStatusCode;
             }
@@ -44,14 +44,13 @@ namespace BLL
         //-------------------------------------------------------------------------------------------------
         public static void DeleteLinkRoomReservation(int IdLinkRoomReservation)
         {
-            //return LinkRoomReservationDB.DeleteLinkRoomReservation(IdLinkRoomReservation);
 
-            String toDelete = linkRoomReservationURL + IdLinkRoomReservation;
+            string linkRoomReservationurl = linkRoomReservationURL + IdLinkRoomReservation;
+
 
             using (HttpClient httpClient = new HttpClient())
             {
-
-                httpClient.DeleteAsync(toDelete);
+                HttpResponseMessage response = httpClient.DeleteAsync(linkRoomReservationurl).Result;
 
             }
         }

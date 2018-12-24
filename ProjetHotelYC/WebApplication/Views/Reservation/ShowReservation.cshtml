@@ -6,10 +6,11 @@
 
 <h2>Votre réservation</h2>
 
-
+@if (Model.IdReservation != 0)
+{
     <h4>Reçu</h4>
     <hr />
-@if (Model.IdReservation != 0) { 
+
     <dl class="dl-horizontal">
         <dt>
             <p>Référence : </p>
@@ -68,20 +69,20 @@
             @foreach (var item in Model.rooms)
             {
 
-               @Html.DisplayFor(modelItem => item.Number)<text>  </text>
-                
+                @Html.DisplayFor(modelItem => item.Number)<text>  </text>
+
             }
-            
+
         </dd>
 
     </dl>
 
 
 
-<p>
-    @Html.ActionLink("Retour à l'acceuil", "Index", "Home") |
-    @Html.ActionLink("Annuler la reservation", "DeleteReservation", "Reservation", new { id = Model.IdReservation }, null)
-</p>
+    <p>
+        @Html.ActionLink("Retour à l'acceuil", "Index", "Home") |
+        @Html.ActionLink("Annuler la reservation", "DeleteReservation", "Reservation", new { id = Model.IdReservation }, null)
+    </p>
 }
 
 else

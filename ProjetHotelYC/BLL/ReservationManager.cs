@@ -51,8 +51,8 @@ namespace BLL
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string pro = JsonConvert.SerializeObject(toAdd);
-                StringContent frame = new StringContent(pro, Encoding.UTF8, "Application/json");
+                string serialize = JsonConvert.SerializeObject(toAdd);
+                StringContent frame = new StringContent(serialize, Encoding.UTF8, "Application/json");
                 Task<HttpResponseMessage> response = httpClient.PostAsync(reservationURL, frame);
 
 
@@ -74,16 +74,25 @@ namespace BLL
         //-------------------------------------------------------------------------------------------------
         public static void DeleteReservation(int IdReservation)
         {
-            //return ReservationDB.DeleteReservation(IdReservation);
 
-            String toDelete = reservationURL + IdReservation;
+            string reservationurl = reservationURL + IdReservation;
+
+            List<LinkRoomReservation> linkRoomReservations = BLL.LinkRoomReservationManager.GetAllLinkRoomReservation();
 
             using (HttpClient httpClient = new HttpClient())
             {
+                HttpResponseMessage response = httpClient.DeleteAsync(reservationurl).Result;
 
-                httpClient.DeleteAsync(toDelete);
-               
             }
+
+            foreach(LinkRoomReservation lrr in linkRoomReservations)
+            {
+                if (lrr.IdReservation.Equals(IdReservation))
+                {
+                    BLL.LinkRoomReservationManager.DeleteLinkRoomReservation(lrr.IdLinkRoomReservation);
+                }
+            }
+
         }
         //-------------------------------------------------------------------------------------------------
 
